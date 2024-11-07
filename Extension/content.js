@@ -24,8 +24,12 @@ function extractText() {
     if (request.action === 'getText') {
       console.log("Extracting text as per request.");
       const text = extractText();
+
+      // Send extracted text to the background script
+      chrome.runtime.sendMessage({ action: "sendTextToBackend", content: text });
+      console.log("Text sent to background script for backend processing.");
+
       console.log("Sending extracted text back to popup.");
       sendResponse({ text: text });
     }
   });
-  

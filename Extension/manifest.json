@@ -4,7 +4,7 @@
     "version": "1.0",
     "description": "An extension to extract text data from webpages.",
     "permissions": ["activeTab", "scripting"],
-    "host_permissions": ["<all_urls>"],  // To access all URLs for content extraction
+    "host_permissions": ["<all_urls>"], 
     "background": {
       "service_worker": "background.js"
     },

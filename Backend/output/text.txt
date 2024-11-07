@@ -1,0 +1,1 @@
+This is a shopping platform due to the presence of product listings, pricing information, and categories related to numerous consumer goods.

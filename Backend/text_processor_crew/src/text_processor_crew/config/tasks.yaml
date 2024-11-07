@@ -1,0 +1,24 @@
+# src/latest_ai_development/config/tasks.yaml
+cleaning_task:
+  description: >
+    Analyze the provided text content and remove all irrelevant, noisy,
+    or distracting text. Ensure that only core, valuable information
+    remains, such as main articles, product descriptions, or essential data.
+    Cleaning task for provided text data: {text_data}
+  expected_output: >
+    A clean and concise version of the text with all extraneous content removed,
+    focusing solely on relevant information.
+  agent: cleaner
+  output_file: cleaned_content.txt
+
+categorization_task:
+  description: >
+    Examine the text content to identify its primary type, such as
+    news, informational article, Wikipedia entry, shopping platform, or blog.
+    Use contextual clues to make a precise categorization.
+  expected_output: >
+    A single line with the determined website type, along with a brief rationale
+    explaining the decision (e.g., "This is a shopping website due to product descriptions
+    and pricing information").
+  agent: categorizer
+  output_file: website_type.txt
