@@ -1,6 +1,9 @@
 # RAGE: Chrome Extension with Backend for Text Extraction and Query Processing using RAG
 
-This project is a Chrome extension integrated with a FastAPI backend for extracting text from web pages and processing user queries using retrieval-augmented generation (RAG). The extension extracts visible text and submits queries, which are processed by the backend. NVIDIA's LLMs are utilized for generating responses, while ChromaDB enables efficient storage and retrieval of embeddings.
+This project is a Chrome extension integrated with a FastAPI backend for extracting text from web pages and processing user queries using retrieval-augmented generation (RAG). The extension extracts visible text and submits queries, which are processed by the backend. NVIDIA's LLMs are utilized to generate responses, while ChromaDB enables efficient storage and retrieval of embeddings.
+
+<img src="Images/ui.png" alt="Application Screenshot" width="500">
+
 
 
 ## Repository Structure
