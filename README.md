@@ -119,7 +119,7 @@ The FastAPI server should start at [http://127.0.0.1:8000](http://127.0.0.1:8000
 
 ## License
 
-This project is licensed under the MIT License. See [The MIT License](https://opensource.org/license/MIT) for details.
+This project is licensed under the MIT License. See [The MIT License](./License.txt) for details.
 
 ## Acknowledgments
 
