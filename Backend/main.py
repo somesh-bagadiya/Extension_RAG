@@ -47,7 +47,6 @@ async def process_query(data: TextData):
     print(context)
     response = generate_response(context, user_query)
     response = response.__str__()
-    print(type(response))
     response = response.replace("assistant: ", "")
     response_message = response_message + f"\n\n**Response:** {response}"
     return {"message": response_message}
