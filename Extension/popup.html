@@ -1,24 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Text Extractor</title>
+  <title>RAGE</title>
+  <script src="popup.js"></script>
   <style>
-    body {
-      width: 300px;
+     body {
+      width: 700px;  /* Adjust width */
+      height: 400px; /* Adjust height */
       font-family: Arial, sans-serif;
     }
-    #output {
+    #output, #responseOutput {
       margin-top: 10px;
       white-space: pre-wrap;
       max-height: 200px;
       overflow-y: auto;
     }
+    #queryInput {
+      width: 100%;
+      padding: 8px;
+    }
+    #sendButton, #extractTextButton {
+      margin-top: 10px;
+      width: 100%;
+      padding: 8px;
+    }
+    /* Spinner styling */
+    .spinner {
+      display: none;  /* Hidden by default */
+      width: 30px;
+      height: 30px;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-top-color: #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Text Extractor</h1>
+  <h1>RAG Extension</h1>
   <button id="extractTextButton">Extract Text</button>
   <div id="output">Extracted text will appear here.</div>
-  <script src="popup.js"></script>
+
+  <h3>Enter your query:</h3>
+  <input type="text" id="queryInput" placeholder="Type your query here">
+  <button id="sendButton">Send Query</button>
+
+  <!-- Spinner for loading indicator -->
+  <div class="spinner" id="spinner"></div>
+
+  <div id="responseOutput">Response will appear here.</div>
+
+  <!-- <h1>RAG Extension</h1>
+  <button id="extractTextButton">Extract Text</button>
+
+  <h3>Enter your query:</h3>
+  <input type="text" id="queryInput" placeholder="Type your query here">
+  <button id="sendButton">Send Query</button>
+
+  <div id="responseOutput">Response will appear here.</div>
+  <div id="output">Extracted text will appear here.</div> -->
 </body>
 </html>

@@ -1,6 +1,6 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "sendTextToBackend") {
-        console.log("Received text from content script:", request.content);
+        console.log("Received text from content script");
 
         // Send the text data to the Python backend
         fetch("http://127.0.0.1:8000/process-text/", {

@@ -2,3 +2,4 @@
 rag_env/
 backend/__pycache__
 backend/.env
+backend/RAGE_DB
