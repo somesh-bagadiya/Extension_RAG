@@ -4,7 +4,16 @@ This project is a Chrome extension integrated with a FastAPI backend for extract
 
 ## Repository Structure
 
-. ├── Backend │ └── main.py # FastAPI server to handle text processing and query requests ├── Extension │ ├── libs # Contains libraries such as marked.js for rendering Markdown in popup │ ├── background.js # Background script for handling messages and backend communication │ ├── content.js # Content script for extracting visible text from the webpage │ ├── manifest.json # Manifest file for Chrome extension configuration │ ├── popup.html # HTML file for the extension's popup interface │ └── popup.js # JavaScript for popup UI interactions and backend requests └── requirements.txt # Python dependencies for the backend
+├── Backend 
+    │ └── main.py # FastAPI server to handle text processing and query requests 
+├── Extension 
+    │ ├── libs # Contains libraries such as marked.js for rendering Markdown in popup 
+    │ ├── background.js # Background script for handling messages and backend communication 
+    │ ├── content.js # Content script for extracting visible text from the webpage 
+    │ ├── manifest.json # Manifest file for Chrome extension configuration 
+    │ ├── popup.html # HTML file for the extension's popup interface 
+    │ └── popup.js # JavaScript for popup UI interactions and backend requests     
+└── requirements.txt # Python dependencies for the backend
 
 
 ## Features
