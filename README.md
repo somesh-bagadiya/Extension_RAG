@@ -117,3 +117,14 @@ The FastAPI server should start at [http://127.0.0.1:8000](http://127.0.0.1:8000
 -   **Error: NVIDIA API Key Missing**: Ensure that the `.env` file contains your NVIDIA API key.
 -   **Extension Not Loading**: Verify that you’ve loaded the `Extension` folder in Chrome’s `chrome://extensions` page.
 
+## License
+
+This project is licensed under the MIT License. See [The MIT License](./License.txt) for details.
+
+## Acknowledgments
+
+- **NVIDIA** for providing LLM and embedding APIs.
+- **ChromaDB** for efficient vector storage and retrieval.
+- **LLAMA_INDEX** for providing comprehensive documentation, which was instrumental in implementing the retrieval-augmented generation (RAG) functionality.
+
+
