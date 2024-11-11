@@ -1,23 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from text_processor_crew.src.text_processor_crew.crew import TextProcessorCrew
-from llama_index.core import SimpleDirectoryReader, Settings, VectorStoreIndex
 from llama_index.embeddings.nvidia import NVIDIAEmbedding
-from llama_index.core import ServiceContext
 from llama_index.llms.nvidia import NVIDIA
 from llama_index.core.node_parser import TokenTextSplitter
-from llama_index.core import Settings
-from llama_index.core import Document
-from llama_index.llms.nvidia import NVIDIA
+from llama_index.core import Document, Settings
 from llama_index.core.llms import ChatMessage, MessageRole
 from uuid import uuid4
 import os
 import re
 import chromadb
+from dotenv import load_dotenv
+load_dotenv()
 
 app = FastAPI()
 embed_model = None
+nvidia_api_key = os.getenv("NVIDIA_API_KEY")
+print(nvidia_api_key)
 
 # Configure CORS to allow requests from the Chrome extension
 app.add_middleware(
@@ -34,7 +33,6 @@ class TextData(BaseModel):
 
 @app.post("/process-text/")
 async def process_text(data: TextData):
-    # print("Received text:", data.content)  # For debugging
     print("process_text called")
     uncleaned_text = data.content
     get_nims_embeddings(uncleaned_text)
@@ -42,38 +40,33 @@ async def process_text(data: TextData):
 
 @app.post("/process-query/")
 async def process_query(data: TextData):
-    # print("Received user query:", data.content)  # For debugging
+    print("process_query called")
     user_query = data.content
-    response_message = f"Processed query: {user_query}"
+    response_message = f"**Prompt: {user_query}**"
     context = retrieve_query_related_embeddings(user_query)
     print(context)
-    generate_response(context, user_query)
+    response = generate_response(context, user_query)
+    response = response.__str__()
+    print(type(response))
+    response = response.replace("assistant: ", "")
+    response_message = response_message + f"\n\n**Response:** {response}"
     return {"message": response_message}
 
 def generate_response(context, user_query):
-    # Initialize the NVIDIA LLM
-    llm = NVIDIA(model='nvidia/llama-3.1-nemotron-70b-instruct')
-
-    # Set the LLM in global settings
+    global nvidia_api_key
+    llm = NVIDIA(model='nvidia/llama-3.1-nemotron-70b-instruct', nvidia_api_key=nvidia_api_key)
     Settings.llm = llm
-
-    # Prepare the prompt by combining context and user query
     messages = [
         ChatMessage(
-            role=MessageRole.SYSTEM, content=("You are a helpful assistant and use the context provided in this message to answer users query. " + str(context))
+            role=MessageRole.SYSTEM, content=("You are a concise, helpful assistant. Use the provided context to answer user queries with brief yet thorough responses. " + str(context))
         ),
         ChatMessage(
             role=MessageRole.USER,
             content=(user_query),
         ),
     ]
-
-    # prompt = [f"Context: {context}\n\nUser Query: {user_query}\n\nGenerate a helpful response based on the context provided."]
-    # print(prompt)
-    # Generate a response using the LLM
     response = llm.chat(messages)
     print(response)
-    # print(response.response_text)
     return response
 
 def clean_text(text):
@@ -85,8 +78,8 @@ def clean_text(text):
     return cleaned_text.strip()
 
 def get_nims_embeddings(uncleaned_text):
-    global embed_model
-    embed_model = NVIDIAEmbedding(model="nvidia/nv-embedqa-mistral-7b-v2")
+    global embed_model, nvidia_api_key
+    embed_model = NVIDIAEmbedding(model="nvidia/nv-embedqa-mistral-7b-v2", nvidia_api_key=nvidia_api_key)
     splitter = TokenTextSplitter(chunk_size=256, chunk_overlap=10, backup_separators=["\n"], include_prev_next_rel=True)
 
     cleaned_text = clean_text(uncleaned_text)
@@ -120,7 +113,3 @@ def create_vectorb():
         print("No collection by name: 'RAGE-DB' ")
     collection = client.get_or_create_collection(name=collection_name)
     return client, collection
-
-# def run(uncleaned_text):
-#     inputs = {'text_data': uncleaned_text}
-#     results = TextProcessorCrew().crew().kickoff(inputs=inputs)
