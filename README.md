@@ -33,8 +33,8 @@ This project is a Chrome extension integrated with a FastAPI backend for extract
 ## Installation
 
 ### 1. Clone the Repository 
-	```git clone https://github.com/somesh-bagadiya/RAGE-RAG_Extension.git```
-	```cd RAGE-RAG_Extension```
+```git clone https://github.com/somesh-bagadiya/RAGE-RAG_Extension.git```
+```cd RAGE-RAG_Extension```
 
 ### 2. Set Up the Backend
 
